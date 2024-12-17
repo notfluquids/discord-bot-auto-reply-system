@@ -1,0 +1,29 @@
+const { Client, IntentsBitField } = require('discord.js');
+
+const client = new Client({
+    intents: [
+        IntentsBitField.Flags.Guilds, 
+        IntentsBitField.Flags.GuildMembers,
+        IntentsBitField.Flags.GuildMessages,
+        IntentsBitField.Flags.MessageContent,
+    ],
+});
+
+client.on('ready', (c) => {
+    console.log(`✅ ${c.user.tag} is online.`); // Message in the terminal when the bot is ready for use
+});
+
+client.on('messageCreate', (message) => {
+    if (message.author.bot) {
+        return; // Prevents the bot from replying to itself or other bots
+    }
+
+    if (message.content.toLowerCase() === 'hey bot') {
+        message.reply('Hello, how can I help? Use / commands'); // Bot reply 1
+    } 
+    
+});
+
+client.login(
+    '' // Add your bot token here
+);
